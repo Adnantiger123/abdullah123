@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi logica online: guida completa</title>
+    <meta name="description" content="Scopri cos'è l'analisi logica online, come funziona e perché è utile per studenti e insegnanti. Guida completa all'analisi logica delle frasi italiane.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <style>
+        /* General Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #00b894; 
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo-img {
+            max-height: 60px;
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e1e1e1;
+        }
+
+        /* --- FAKE TOOL UI STYLES --- */
+        .replica-container {
+            margin: 30px 0;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .input-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fff;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .replica-container:hover .input-card,
+        .replica-container:hover .examples-card {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #b2bec3;
+        }
+
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #b2bec3;
+            font-weight: 500;
+        }
+
+        .mic-btn {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .fake-textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 16px;
+            color: #777;
+            background: #fff;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .char-limit {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .analyze-btn-large {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #000;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .examples-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .examples-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .pills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            border: 1px solid #000;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+            color: #333;
+            background: #fff;
+            display: inline-block;
+        }
+
+        /* Typography */
+        h1 { color: #2d3436; font-size: 28px; margin-bottom: 15px; border-bottom: 2px solid #00b894; padding-bottom: 10px; }
+        h2 { color: #00b894; margin-top: 30px; margin-bottom: 15px; font-size: 22px; }
+        h3 { color: #444; margin-top: 20px; margin-bottom: 10px; font-size: 18px; }
+        p { margin-bottom: 15px; font-size: 17px; color: #555; text-align: justify; }
+        
+        ul, ol { margin-bottom: 20px; padding-left: 25px; }
+        li { margin-bottom: 8px; color: #555; }
+        
+        a.text-link { color: #00b894; text-decoration: none; border-bottom: 1px dotted #00b894; font-weight: bold; }
+        a.text-link:hover { color: #019677; border-bottom: 1px solid #019677; }
+
+        footer { background-color: #2d3436; color: #b2bec3; text-align: center; padding: 20px 0; font-size: 14px; margin-top: auto; }
+
+        @media (max-width: 600px) {
+            .content-box { padding: 20px; }
+            h1 { font-size: 24px; }
+            .pills-wrapper { flex-direction: column; }
+            .pill { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="Analisi Logica Logo" class="logo-img">
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="content-box">
+            
+            <h1>Analisi logica online: guida completa per studenti, insegnanti e appassionati di grammatica italiana</h1>
+
+            <p>
+            L’<strong>analisi logica online</strong> è diventata uno strumento fondamentale per chi studia la lingua italiana e desidera comprendere in modo chiaro e strutturato la funzione delle parole all’interno di una frase. Grazie alle moderne piattaforme digitali, oggi è possibile analizzare una frase in pochi secondi, senza bisogno di manuali complessi o lunghe ricerche teoriche.
+            </p>
+
+            <!-- START: FAKE TOOL / SEARCH BAR (Directs to site) -->
+            <a href="https://analisilogicafrase.it/" target="_blank" class="replica-container">
+                
+                <div class="input-card">
+                    <div class="input-header">
+                        <span>Quale frase devo analizzare?</span>
+                        <div class="mic-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                            Dettatura
+                        </div>
+                    </div>
+                    <div class="fake-textarea">Inserisci la tua frase qui...</div>
+                    <div class="char-limit">
+                        <span>Limite: 500 caratteri</span>
+                        <span>0/500</span>
+                    </div>
+                    <div class="analyze-btn-large">Analizza Frase</div>
+                </div>
+
+                <div class="examples-card">
+                    <div class="examples-title">Frasi di Esempio</div>
+                    <div class="pills-wrapper">
+                        <div class="pill">Il bambino gioca nel parco</div>
+                        <div class="pill">Maria legge un libro interessante</div>
+                        <div class="pill">Gli studenti studiano per l'esame</div>
+                    </div>
+                </div>
+
+            </a>
+            <!-- END: FAKE TOOL -->
+
+            <p>
+            Uno dei migliori strumenti disponibili sul web per questo scopo è 
+            <a href="https://analisilogicafrase.it/" target="_blank" class="text-link">analisi logica online</a>, 
+            una risorsa gratuita pensata per studenti, docenti e chiunque voglia migliorare le proprie competenze grammaticali.
+            </p>
+
+            <h2>Cos’è l’analisi logica</h2>
+
+            <p>
+            L’analisi logica è una branca della grammatica italiana che studia <strong>la funzione logica delle parole all’interno di una frase</strong>. A differenza dell’analisi grammaticale, che si concentra sulla categoria delle singole parole, l’analisi logica risponde alla domanda: <em>che ruolo svolge questa parola nella frase?</em>
+            </p>
+
+            <p>
+            Attraverso l’analisi logica si individuano elementi fondamentali come:
+            </p>
+
+            <ul>
+                <li>Soggetto</li>
+                <li>Predicato verbale o nominale</li>
+                <li>Complemento oggetto</li>
+                <li>Complementi indiretti (tempo, luogo, causa, fine, modo, ecc.)</li>
+            </ul>
+
+            <p>
+            Comprendere questi elementi è essenziale per scrivere correttamente, interpretare testi complessi e affrontare verifiche ed esami scolastici.
+            </p>
+
+            <h2>Perché usare un tool di analisi logica online</h2>
+
+            <h3>1. Velocità e semplicità</h3>
+            <p>
+            Inserendo una frase, il sistema fornisce immediatamente l’analisi completa, rendendo l’apprendimento più rapido ed efficace.
+            </p>
+
+            <h3>2. Supporto allo studio</h3>
+            <p>
+            È uno strumento ideale per studenti delle scuole medie e superiori che vogliono verificare i propri esercizi o chiarire dubbi grammaticali.
+            </p>
+
+            <h3>3. Accessibilità</h3>
+            <p>
+            Essendo online, il servizio è disponibile da qualsiasi dispositivo: computer, tablet o smartphone, senza bisogno di installare software.
+            </p>
+
+            <h3>4. Apprendimento pratico</h3>
+            <p>
+            Vedere l’analisi già svolta aiuta a comprendere la logica della frase e a interiorizzare le regole grammaticali.
+            </p>
+
+            <h2>Come funziona analisilogicafrase.it</h2>
+
+            <p>
+            Il sito analisilogicafrase.it è progettato per essere intuitivo e immediato. Il funzionamento è molto semplice:
+            </p>
+
+            <ol>
+                <li>Si inserisce una frase in lingua italiana</li>
+                <li>Il sistema analizza automaticamente la struttura</li>
+                <li>Vengono evidenziati soggetto, predicato e complementi</li>
+                <li>Ogni elemento viene spiegato in modo chiaro e comprensibile</li>
+            </ol>
+
+            <p>
+            Questo approccio rende il sito particolarmente utile anche per chi non ha una preparazione grammaticale avanzata.
+            </p>
+
+            <h2>A chi è utile l’analisi logica online</h2>
+
+            <p>
+            L’uso dell’analisi logica online è consigliato a diversi tipi di utenti:
+            </p>
+
+            <ul>
+                <li>Studenti, per esercitarsi e correggere i compiti</li>
+                <li>Insegnanti, come supporto didattico durante le lezioni</li>
+                <li>Genitori, per aiutare i figli nello studio</li>
+                <li>Stranieri che stanno imparando la lingua italiana</li>
+                <li>Appassionati di grammatica italiana</li>
+            </ul>
+
+            <h2>Limiti degli strumenti automatici</h2>
+
+            <p>
+            È importante ricordare che, sebbene molto accurati, i tool automatici non sono infallibili. Frasi particolarmente complesse o ambigue possono richiedere una verifica manuale. Tuttavia, come strumento di supporto allo studio, l’analisi logica online rimane estremamente efficace.
+            </p>
+
+            <h2>Conclusione</h2>
+
+            <p>
+            L’<strong>analisi logica online</strong> rappresenta una soluzione moderna, pratica ed efficiente per comprendere la struttura delle frasi italiane. Grazie a strumenti affidabili come analisilogicafrase.it, lo studio della grammatica diventa più accessibile e meno stressante.
+            </p>
+
+            <p>
+            Che tu sia uno studente, un insegnante o semplicemente un amante della lingua italiana, utilizzare un servizio di analisi logica online può fare davvero la differenza nel tuo percorso di apprendimento.
+            </p>
+        
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Analisi Logica Online. Tutti i diritti riservati.</p>
+    </footer>
+
+</body>
+</html>
